@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Interface</title>
+  <style>
+    body {
+      background-color: #F6DF00;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .chat-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 500px;
+      padding: 20px;
+      box-sizing: border-box;
+      background-color: #45424D;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .chat-content {
+      height: 750px;
+      width: 100%;
+      background-color: #ADBFD2;
+      border-radius: 8px;
+      overflow-y: scroll;
+      padding: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .line {
+      display: flex;
+      margin-bottom: 10px;
+    }
+
+    .chat-box {
+      background-color: #f0f0f0;
+      padding: 5px;
+      max-width: 85%;
+      border-radius: 85px;
+      position: relative; /* 새로운 줄 추가 */
+      margin-left: 15px; /* 새로운 줄 추가 */
+    }
+
+    .chat-img {
+      width: 50px; /* 이미지 크기 조정 */
+      height: 50px;
+      border-radius: 50%; /* 동그라미 모양으로 */
+      left: 0px; /* 채팅 상자 왼쪽에 위치 */
+      top: 50%; /* 수직 중앙 정렬 */
+    } 
+
+    .mine {
+      margin-left: auto;
+      background-color: #F6DF00;
+    }
+
+    #input {
+      width: calc(100% - 80px);
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-right: 10px;
+      font-size: 14px;
+    }
+
+    #send {
+      background-color: #6D4D52;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      width: 80px;
+    }
+
+    #send:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-wrapper">
+    <div class="chat-content" id="chat-content">
+      <div class="line">
+        <img src="./img.jpg" class="chat-img" alt="Profile" />
+        <div class="chat-box">
+          <div class="chat-box">안녕하세요?</div>
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; width: 100%;">
+      <input class="chat-box" id="input" placeholder="메시지를 입력하세요...">
+      <button id="send">전송</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import OpenAI from 'https://cdn.skypack.dev/openai';
+
+    const openai = new OpenAI({
+      apiKey: 'Your api key',
+      dangerouslyAllowBrowser: true
+    });
+
+    const sendMessage = () => {
+      var userMessage = document.querySelector('#input').value.trim();
+      if (userMessage === '') return;
+
+      var template = `
+        <div class="line">
+          <div class="chat-box mine">
+            ${userMessage}
+          </div>
+        </div>
+      `;
+      document.querySelector('#chat-content').insertAdjacentHTML('beforeend', template);
+      document.querySelector('#input').value = '';
+
+      openai.chat.completions.create({
+        model: "gpt-4-turbo",
+        messages: [{ role: "user", content: userMessage }],
+        temperature: 0.7,
+        max_tokens: 256,
+        top_p: 1,
+        frequency_penalty: 0,
+        presence_penalty: 0,
+      }).then((result) => {
+        console.log(result);
+        var responseMessage = result.choices[0].message.content;
+        var responseTemplate = `
+          <div class="line">
+            <img src="./a.jpg" class="chat-img" alt="Profile" />
+            <div class="chat-box">${responseMessage}</div>
+          </div>
+        `;
+        document.querySelector('#chat-content').insertAdjacentHTML('beforeend', responseTemplate);
+      }).catch((error) => {
+        console.error(error);
+      });
+    };
+
+    document.querySelector('#send').addEventListener('click', sendMessage);
+
+    document.querySelector('#input').addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        sendMessage();
+      }
+    });
+  </script>
+
+</body>
+</html>
