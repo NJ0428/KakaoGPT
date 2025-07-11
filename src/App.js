@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import OpenAI from 'openai';
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import ChatMessage from './components/ChatMessage';
 import ChatInput from './components/ChatInput';
 
-// OpenAI 클라이언트 초기화 (실제 API 키로 교체 필요)
-const openai = new OpenAI({
-  apiKey: 'Your api key',
-  dangerouslyAllowBrowser: true
-});
+// Gemini 클라이언트 초기화 (API 키는 .env.local 파일에서 가져옵니다)
+const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY);
 
 function App() {
   const [messages, setMessages] = useState([
@@ -48,18 +45,12 @@ function App() {
     setIsLoading(true);
 
     try {
-      // OpenAI API 호출
-      const result = await openai.chat.completions.create({
-        model: "gpt-4-turbo",
-        messages: [{ role: "user", content: userMessage }],
-        temperature: 0.7,
-        max_tokens: 256,
-        top_p: 1,
-        frequency_penalty: 0,
-        presence_penalty: 0,
-      });
+      // Gemini API 호출
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest"});
+      const result = await model.generateContent(userMessage);
+      const response = await result.response;
+      const responseMessage = response.text();
 
-      const responseMessage = result.choices[0].message.content;
       const responseTime = new Date().toLocaleTimeString('ko-KR', {
         hour: '2-digit',
         minute: '2-digit',
@@ -73,14 +64,14 @@ function App() {
         timestamp: responseTime 
       }]);
     } catch (error) {
-      console.error('OpenAI API 오류:', error);
+      console.error('Gemini API 오류:', error);
       const errorTime = new Date().toLocaleTimeString('ko-KR', {
         hour: '2-digit',
         minute: '2-digit',
         hour12: false
       });
       setMessages(prev => [...prev, { 
-        text: '죄송합니다. 오류가 발생했습니다. 다시 시도해주세요. 😅', 
+        text: '죄송합니다. 오류가 발생했습니다. API 키를 확인해주세요. 😅', 
         isUser: false,
         timestamp: errorTime
       }]);
