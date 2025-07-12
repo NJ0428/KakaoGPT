@@ -1,0 +1,63 @@
+.selection-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #B2C7D9;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+}
+
+.selection-title {
+  color: #3A3A3C;
+  font-size: 28px;
+  margin-bottom: 50px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.selection-options {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
+  max-width: 340px;
+}
+
+.selection-option {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 25px 30px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #EAEAEA;
+}
+
+.selection-option:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.selection-icon {
+  font-size: 52px;
+  margin-bottom: 18px;
+  line-height: 1;
+}
+
+.selection-option-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 8px 0;
+}
+
+.selection-option-description {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+} 

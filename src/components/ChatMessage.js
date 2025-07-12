@@ -1,20 +1,24 @@
 import React from 'react';
 
-const ChatMessage = ({ message, isUser, timestamp }) => {
+const ChatMessage = ({ message, isUser, isSystem, timestamp }) => {
+  if (isSystem) {
+    return (
+      <div className="system-message-container">
+        <div className="system-message">{message}</div>
+      </div>
+    );
+  }
+
+  const messageGroupClass = isUser ? 'message-group mine' : 'message-group';
+  
   return (
-    <div className={`message-group ${isUser ? 'mine' : ''}`}>
-      <div className={`message-wrapper ${isUser ? 'mine' : ''}`}>
-        {!isUser && (
-          <img src="./img.jpg" className="chat-img" alt="Profile" />
-        )}
+    <div className={messageGroupClass}>
+      <div className="message-wrapper">
+        {!isUser && <img src="./img.jpg" className="chat-img" alt="Profile" />}
         <div className={`chat-box ${isUser ? 'mine' : ''}`}>
           {message}
         </div>
-        {timestamp && (
-          <div className="message-time">
-            {timestamp}
-          </div>
-        )}
+        <div className="message-time">{timestamp}</div>
       </div>
     </div>
   );

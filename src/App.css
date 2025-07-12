@@ -49,6 +49,17 @@ body {
   color: #B0B0B0;
 }
 
+.back-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 10px;
+  padding: 0 10px;
+}
+
 .chat-content {
   flex: 1;
   overflow-y: auto;
@@ -123,6 +134,21 @@ body {
   margin: 0 6px 2px 6px;
   align-self: flex-end;
   white-space: nowrap;
+}
+
+.system-message-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.system-message {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #555;
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 12px;
+  text-align: center;
 }
 
 /* 메시지 등장 애니메이션 */
