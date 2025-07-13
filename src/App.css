@@ -295,3 +295,49 @@ body {
     transform: none;
   }
 } 
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px 10px 32px;
+  background: #ffeb00;
+  border-bottom: 1px solid #eee;
+}
+.app-header h1 {
+  font-size: 1.7rem;
+  font-weight: bold;
+  margin: 0;
+}
+.app-header nav {
+  display: flex;
+  gap: 12px;
+}
+.app-header nav a {
+  color: #222;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.app-header nav a:hover {
+  background: #fffbe6;
+}
+
+body[data-theme='dark'] .app-header {
+  background: #23272f;
+  border-bottom: 1px solid #444;
+}
+body[data-theme='dark'] .app-header nav a {
+  color: #ffeb00;
+}
+body[data-theme='dark'] .app-header nav a:hover {
+  background: #333;
+}
+
+main {
+  min-height: 80vh;
+  padding: 24px 0;
+} 
