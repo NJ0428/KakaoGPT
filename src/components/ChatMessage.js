@@ -10,13 +10,14 @@ const ChatMessage = ({ message, isUser, isSystem, timestamp }) => {
   }
 
   const messageGroupClass = isUser ? 'message-group mine' : 'message-group';
+  const messageWrapperClass = isUser ? 'message-wrapper mine' : 'message-wrapper';
   
   return (
     <div className={messageGroupClass}>
-      <div className="message-wrapper">
+      <div className={messageWrapperClass}>
         {!isUser && <img src="./img.jpg" className="chat-img" alt="Profile" />}
         <div className={`chat-box ${isUser ? 'mine' : ''}`}>
-          {message}
+          <div className="message-content">{message}</div>
         </div>
         <div className="message-time">{timestamp}</div>
       </div>
