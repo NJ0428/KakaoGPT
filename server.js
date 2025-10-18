@@ -27,9 +27,14 @@ io.on('connection', (socket) => {
   });
 
   socket.on('chat message', (msg) => {
-    console.log('message from ' + socket.id + ': ' + msg.text);
+    console.log('message from ' + socket.id + ' (' + (msg.nickname || '익명') + '): ' + msg.text);
     // 메시지를 보낸 클라이언트를 제외한 모든 클라이언트에게 메시지 전송
-    socket.broadcast.emit('chat message', { ...msg, id: socket.id });
+    socket.broadcast.emit('chat message', {
+      text: msg.text,
+      timestamp: msg.timestamp,
+      nickname: msg.nickname || '익명',
+      id: socket.id
+    });
   });
 });
 
