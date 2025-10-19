@@ -5,6 +5,7 @@ const Settings = () => {
   // localStorage에서 초기값 불러오기
   const [nickname, setNickname] = useState(() => localStorage.getItem('nickname') || '');
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
+  const [aiModel, setAiModel] = useState(() => localStorage.getItem('aiModel') || 'gemini');
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
@@ -14,6 +15,7 @@ const Settings = () => {
   const handleSave = () => {
     localStorage.setItem('nickname', nickname);
     localStorage.setItem('theme', theme);
+    localStorage.setItem('aiModel', aiModel);
     setSaved(true);
     setTimeout(() => setSaved(false), 1500);
   };
@@ -45,6 +47,23 @@ const Settings = () => {
             onClick={() => setTheme('dark')}
           >
             다크
+          </button>
+        </div>
+      </div>
+      <div className="settings-item">
+        <label>AI 모델</label>
+        <div className="theme-toggle">
+          <button
+            className={aiModel === 'gemini' ? 'active' : ''}
+            onClick={() => setAiModel('gemini')}
+          >
+            Gemini
+          </button>
+          <button
+            className={aiModel === 'gpt' ? 'active' : ''}
+            onClick={() => setAiModel('gpt')}
+          >
+            GPT-4
           </button>
         </div>
       </div>

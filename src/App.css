@@ -73,6 +73,26 @@ body {
   flex-shrink: 0;
 }
 
+.clear-history-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: clamp(18px, 4.5vw, 24px);
+  cursor: pointer;
+  padding: 5px;
+  margin-left: auto;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.clear-history-button:hover {
+  transform: scale(1.1);
+}
+
 .chat-content {
   flex: 1;
   overflow-y: auto;
@@ -94,6 +114,14 @@ body {
 
 .message-group:not(.mine) {
   align-items: flex-start;
+}
+
+.message-nickname {
+  font-size: clamp(10px, 2.5vw, 12px);
+  color: #555;
+  font-weight: 600;
+  margin-bottom: 4px;
+  margin-left: clamp(40px, 10vw, 55px);
 }
 
 .message-wrapper {
@@ -226,6 +254,38 @@ body {
   gap: clamp(6px, 2vw, 10px);
 }
 
+.emoji-button {
+  background: none;
+  border: none;
+  font-size: clamp(20px, 5vw, 24px);
+  cursor: pointer;
+  padding: clamp(6px, 2vw, 10px);
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.emoji-button:hover {
+  transform: scale(1.1);
+}
+
+.emoji-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.emoji-picker-wrapper {
+  position: absolute;
+  bottom: 70px;
+  left: 10px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
 .chat-input {
   flex: 1;
   border: 1px solid #E5E5EA;
@@ -307,6 +367,21 @@ body {
   align-items: center;
   color: #8E8E93;
   font-style: italic;
+}
+
+.chat-box.streaming::after {
+  content: '▌';
+  animation: blink 0.8s infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
 }
 
 .loading-dots {
