@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import LandingPage from './components/LandingPage';
 import ChatSelection from './components/ChatSelection';
 import ChatRoom from './components/ChatRoom';
 import Settings from './components/Settings';
@@ -22,13 +23,15 @@ function App() {
         <header className="app-header">
           <h1>KakaoGPT</h1>
           <nav>
-            <Link to="/">채팅</Link>
+            <Link to="/">홈</Link>
+            <Link to="/chat" style={{ marginLeft: 12 }}>채팅</Link>
             <Link to="/settings" style={{ marginLeft: 12 }}>설정</Link>
           </nav>
         </header>
         <main>
           <Routes>
-            <Route path="/" element={!chatType ? (
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/chat" element={!chatType ? (
               <ChatSelection onSelectChat={handleSelectChat} />
             ) : (
               <ChatRoom chatType={chatType} onBack={handleBackToSelection} />
