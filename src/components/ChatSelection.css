@@ -1,184 +1,114 @@
+:root {
+  --primary-bg-color: #f0f4f8;
+  --secondary-bg-color: #ffffff;
+  --primary-text-color: #1a202c;
+  --secondary-text-color: #4a5568;
+  --accent-color: #4299e1;
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --card-hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
 .selection-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #B2C7D9;
-  padding: clamp(15px, 5vw, 30px);
-  box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+  background-color: var(--primary-bg-color);
+  padding: 2rem;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.selection-header {
+  text-align: center;
+  margin-bottom: 3rem;
 }
 
 .selection-title {
-  color: #3A3A3C;
-  font-size: clamp(22px, 6vw, 32px);
-  margin-bottom: clamp(30px, 8vw, 60px);
+  font-size: 2.5rem;
   font-weight: 700;
-  text-align: center;
-  line-height: 1.2;
+  color: var(--primary-text-color);
+  margin-bottom: 0.5rem;
+}
+
+.selection-subtitle {
+  font-size: 1.125rem;
+  color: var(--secondary-text-color);
+  max-width: 500px;
 }
 
 .selection-options {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(15px, 4vw, 30px);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
   width: 100%;
-  max-width: min(90vw, 400px);
+  max-width: 600px;
+}
+
+@media (min-width: 768px) {
+  .selection-options {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .selection-option {
-  background-color: #ffffff;
-  border-radius: clamp(15px, 4vw, 25px);
-  padding: clamp(20px, 5vw, 30px);
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  border: 1px solid #EAEAEA;
-  min-height: 120px;
+  background-color: var(--secondary-bg-color);
+  border-radius: 0.75rem;
+  padding: 2rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-items: flex-start;
+  gap: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: var(--card-shadow);
+  border: 1px solid #e2e8f0;
 }
 
 .selection-option:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-}
-
-.selection-option:active {
-  transform: translateY(-2px) scale(1.01);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(-5px);
+  box-shadow: var(--card-hover-shadow);
 }
 
 .selection-icon {
-  font-size: clamp(40px, 10vw, 60px);
-  margin-bottom: clamp(12px, 3vw, 20px);
+  font-size: 3rem;
   line-height: 1;
 }
 
+.selection-text {
+  text-align: left;
+}
+
 .selection-option-title {
-  font-size: clamp(16px, 4vw, 22px);
+  font-size: 1.25rem;
   font-weight: 600;
-  color: #333;
-  margin: 0 0 clamp(6px, 2vw, 10px) 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: var(--primary-text-color);
+  margin: 0 0 0.5rem 0;
 }
 
 .selection-option-description {
-  font-size: clamp(12px, 3vw, 15px);
-  color: #666;
+  font-size: 1rem;
+  color: var(--secondary-text-color);
   margin: 0;
-  line-height: 1.5;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  line-height: 1.6;
 }
 
-/* 반응형 미디어 쿼리 */
-@media (max-width: 480px) {
-  .selection-container {
-    padding: 20px 15px;
-  }
-  
-  .selection-options {
-    gap: 20px;
-    max-width: 95vw;
-  }
-  
-  .selection-option {
-    padding: 18px 20px;
-    min-height: 100px;
-  }
-  
-  .selection-option:hover {
-    transform: translateY(-3px) scale(1.01);
-  }
+.selection-footer {
+  margin-top: 3rem;
 }
 
-@media (min-width: 481px) and (max-width: 768px) {
-  .selection-container {
-    padding: 25px 20px;
-  }
-  
-  .selection-options {
-    max-width: 450px;
-    gap: 25px;
-  }
-  
-  .selection-option {
-    padding: 25px;
-    min-height: 130px;
-  }
+.back-button {
+  background-color: transparent;
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-@media (min-width: 769px) {
-  .selection-container {
-    padding: 40px;
-  }
-  
-  .selection-options {
-    max-width: 500px;
-    gap: 30px;
-  }
-  
-  .selection-option {
-    padding: 30px;
-    min-height: 140px;
-  }
+.back-button:hover {
+  background-color: var(--accent-color);
+  color: var(--secondary-bg-color);
 }
-
-/* 가로 모드 대응 */
-@media (orientation: landscape) and (max-height: 600px) {
-  .selection-container {
-    justify-content: flex-start;
-    padding-top: 20px;
-  }
-  
-  .selection-title {
-    margin-bottom: 20px;
-    font-size: clamp(18px, 4vw, 24px);
-  }
-  
-  .selection-options {
-    gap: 15px;
-  }
-  
-  .selection-option {
-    min-height: 80px;
-    padding: 15px 20px;
-  }
-  
-  .selection-icon {
-    font-size: clamp(30px, 6vw, 40px);
-    margin-bottom: 8px;
-  }
-}
-
-/* 접근성을 위한 동작 감소 모드 */
-@media (prefers-reduced-motion: reduce) {
-  .selection-option {
-    transition: none;
-  }
-  
-  .selection-option:hover {
-    transform: none;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .selection-option:active {
-    transform: none;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  }
-}
-
-/* 터치 기반 인터랙션 최적화 */
-@media (pointer: coarse) {
-  .selection-option {
-    min-height: 120px;
-  }
-} 
